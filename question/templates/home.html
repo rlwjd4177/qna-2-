@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        a{
+            text-decoration: none;
+            color:black;
+        }
+        #content:hover{
+            text-decoration:underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>대문풀(대신문제풀어드림)</h1>
+
+    {% for question in questions %}
+
+
+    <hr>
+    <a href="{%url 'question' question.id%}" id="content">
+    <h3>{{question.title}}</h3>
+    {{question.pup_date}}
+    </a>
+
+
+    {% endfor %}
+    
+    <hr>
+    <button type="button">질문하기</button>
+</body>
+</html>
