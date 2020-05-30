@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content%}
+    {% for question in questions %}
+
+    <hr>
+    <a href="{%url 'question' question.id%}" id="content">
+    <h3>{{question.title}}</h3>
+    {{question.body}}
+    </a>
+
+    {% endfor %}
+{% endblock%}
