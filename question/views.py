@@ -9,9 +9,9 @@ def home(request):
 
 def question(request,question_id):
     question = get_object_or_404(Question,pk = question_id)
-    # answers =question.answer_set
+    answers = Answer.objects.filter(question_id = question.id)
+    return render(request,'question.html',{'question':question, 'answers': answers})
 
-    return render(request,'question.html',{'question':question})
 
 def search(request):
     q = request.GET.get('q')

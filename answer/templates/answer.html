@@ -1,0 +1,24 @@
+<!-- nav 바! -->
+
+<form action="{% url 'create' %}" method = "POST">
+    {%csrf_token%}
+    <h3>Q 질문</h3> : <input type="text" name="title" size="40">
+
+    <textarea name="body" id="" cols="30" rows="10" 
+    placeholder="궁금한 내용을 질문해 주세요.
+    질문 시 이런 점을 주의해 주세요!
+    -답변이 등록되면 질문 수정/삭제가 불가합니다."></textarea>
+
+    <button type="submit">제출하기</button>
+</form>
+
+<!-- 아래는 model 값들 -->
+
+<!-- {{answer.title}}
+{{answer.pub_date}}
+{{answer.body}}
+ 나중에 이미지 -->
+<!-- {{answer.professor_name}}
+{{answer.subject_name}}
+{{answer.answer}}   -> 이거 Foreign --> 
+<!-- title, body, 작성자 정보(?), 기입한 시간 넘기기 -->
