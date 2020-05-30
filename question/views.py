@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from .forms import QuestionForm
 from .models import Question
 from django.utils import timezone
-
+from answer.models import Answer
 def home(request):
     questions = Question.objects.all()
     return render(request,'home.html',{'questions': questions})
