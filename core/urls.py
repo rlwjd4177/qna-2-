@@ -17,8 +17,10 @@ from django.contrib import admin
 from django.urls import path,include
 import question.urls
 import answer.urls
+import account.urls
 from django.conf import settings
 from django.conf.urls.static import static
+
 
 
 urlpatterns = [
@@ -26,6 +28,7 @@ urlpatterns = [
     path('',question.views.home,name="home"),
     path('question/',include(question.urls)),
     path('answer/',include(answer.urls)),
+    path('account/',include(account.urls)),
 ]
 
 

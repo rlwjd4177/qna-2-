@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"> 
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="nanum" style="text-align: center; margin: 30px 0;"><a href="{%url 'home'%}">대문풀</h1></a>
+    <hr>
+    <div class="container">
+        <form method="POST">
+            {% csrf_token%}
+            {{form.as_p}}
+            <input type="submit" value="입력">
+        </form>
+    </div>
+</body>
+</html>
+<style>
+    .nanum { font-family: 'NanumSquare', sans-serif}
+    a{
+        text-decoration: none;
+        color: black;
+    }
+</style>
