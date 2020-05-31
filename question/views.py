@@ -29,9 +29,11 @@ def search(request):
             title__icontains=q
         ) | Answer.objects.filter(
             body__icontains=q
-    )"""
+    )
+    """
 
     return render(request,'search.html',{'questions':questions})
+    
 
 def new(request):
     if request.method == 'POST':
