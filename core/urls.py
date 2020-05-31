@@ -16,17 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 import question.urls
+import answer.urls
 from django.conf import settings
 from django.conf.urls.static import static
 
-import answer.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',question.views.home,name="home"),
     path('question/',include(question.urls)),
-
-    path('answer/select/<int:answer_id>', answer.views.select,name = "select"),
+    path('answer/',include(answer.urls)),
 ]
 
 
