@@ -3,6 +3,7 @@ from .forms import QuestionForm
 from .models import Question
 from django.utils import timezone
 from answer.models import Answer
+
 def home(request):
     questions = Question.objects.all()
     return render(request,'home.html',{'questions': questions})
@@ -43,6 +44,24 @@ def new(request):
     else :
         form = QuestionForm()
         return render(request,'new.html',{'form':form})
+
+def edit(request,question_id):
+    question = get_object_or_404(Question,pk=question_id)
+
+    if request.method == 'POST':
+        form = QuestionForm(request.POST,instance= question)
+        if form.is_valid :
+            question = form.save()
+            return redirect('question',question.id)
+
+    else :
+        form = QuestionForm(instance=question)
+        return render(request,'edit.html',{'form':form})
+
+def delete(request,question_id):
+    delete_question = get_object_or_404(Question, pk = question_id)
+    delete_question.delete()
+    return redirect('home')
 
 
 # Create your views here.
