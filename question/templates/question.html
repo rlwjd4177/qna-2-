@@ -5,31 +5,52 @@
     {{question.subject_name}} > {{question.professor_name}}
     </div>
     
-        <h3>질문 : {{question.title}}</h3>
+        
 
     <hr>
-    <div class="card p-3 my-3 " style="width: 30rem;">
+    <div class="card p-3 my-3 " style="width: 40rem;">
+        <h3>질문 : {{question.title}}</h3>
+        <hr>
         <h5>{{question.body}}</h5>
-        <p style="text-align: right; margin: 0;">{{question.pub_date}}</p>
+        {% if question.image%}
+            <img src="{{question.image.url}}">
+        {% endif %}
+        <p style="text-align: right; margin: 0;color:grey;">{{question.pub_date}}</p>
     </div>
 
     <a href="{%url 'edit' question.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
     <a href="{%url 'delete' question.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
     
-    <hr>
-    <a href="{% url 'answer' question.id %}" class="btn-sm btn btn-outline-primary">답변하기</a>
+    <!-- <hr> -->
+    <br>
+    <a href="{% url 'answer' question.id %}" class="btn-sm btn btn-outline-primary" style="float:right;">답변하기</a>
+    <br>
+    <br>
+
+    <!-- 답변 카드 -->
+
     {% for answer in answers %}
-        {% if answer.sleceted == True %}
-            채택됨
-        {% else%}
-            채택을 기다리는중 !
-            <a href="{% url 'select' answer.id%}">채택하기</a>
-    
-        {% endif %}
-            {{answer.title}}
-            {{answer.body}}
-            {{answer.pub_date}}
+        <div class="card p-3 " style="width: 40rem; float:right;">
+            {% if answer.sleceted == True %}
+                <p style="text-align: right; margin: 0;">채택됨</p>
+            {% else%}
+                <a href="{% url 'select' answer.id%}" class="btn-sm btn btn-outline-primary" style="float:right;width:4.7rem;">채택하기</a>
+                <p style="text-align:right; margin: 0;">채택을 기다리는중 !</p>
+            {% endif %}
+                <h5>{{answer.title}}</h5>
+                <hr>
+                {{answer.body}}
+                <br>
+                {% if question.image%}
+                    <img src="{{answer.image.url}}">
+                {% endif %}
+
+                <p style="text-align: right; margin: 0;color:grey;">{{answer.pub_date}}</p>
+        </div>
+        <p style="clear:both;">&nbsp</p>
     {% endfor%}
+    
+    <hr>
 
     </div>
 {% endblock %}
