@@ -10,3 +10,4 @@ class CustomUserModel(AbstractUser):
     
     birthday = models.DateField(blank = True, null = True) # 둘다 True인 경우 -> 로그인에 상관이 없는 경우
     gender = models.CharField(max_length=2,blank = True, null = True,choices=GENDER)
+    point = models.IntegerField(null = True,default=100)

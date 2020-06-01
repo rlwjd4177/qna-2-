@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container">
     <div class="point">
-    {{question.subject_name}} > {{question.professor_name}}
+    {{question.subject_name}}(과목명) > {{question.professor_name}}(교수명), {{question.user.username}}
     </div>
     
         <h3>질문 : {{question.title}}</h3>
@@ -17,18 +17,22 @@
     <a href="{%url 'delete' question.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
     
     <hr>
-    <a href="{% url 'answer' question.id %}" class="btn-sm btn btn-outline-primary">답변하기</a>
+    <a href="{% url 'answer' question.id %}" class="btn-lg btn btn-outline-primary" style="margin-left:42%;">답변하기</a>
+    <br>
     {% for answer in answers %}
-        {% if answer.sleceted == True %}
-            채택됨
-        {% else%}
-            채택을 기다리는중 !
-            <a href="{% url 'select' answer.id%}">채택하기</a>
+        {% if answer.selected == True%}
+        <form action="{% url 'select' answer.id%}">
+            <input type="submit" value="채택하기">
+        </form>
+        {% elif answer.selected != True %}
+        채택됨!<br>
+        {% endif%}
     
-        {% endif %}
-            {{answer.title}}
-            {{answer.body}}
-            {{answer.pub_date}}
+        {{answer.title}}
+        {{answer.body}}
+        {{answer.pub_date}}
+        {{answer.user.username}}
+        <hr>
     {% endfor%}
 
     </div>
