@@ -25,16 +25,19 @@
     <a href="{% url 'answer' question.id %}" class="btn-lg btn btn-outline-primary" style="margin-left:42%;">답변하기</a>
     <br>
     {% for answer in answers %}
-        {% if answer.selected == True%}
+        {% if answer.selected != True%}
         <form action="{% url 'select' answer.id%}">
             <input type="submit" value="채택하기">
         </form>
-        {% elif answer.selected != True %}
+        {% elif answer.selected == True %}
         채택됨!<br>
         {% endif%}
     
         {{answer.title}}
         {{answer.body}}
+        {% if answer.image%}
+            <img src="{{answer.image.url}}">
+        {% endif %}
         {{answer.pub_date}}
         {{answer.user.username}}
         <hr>
