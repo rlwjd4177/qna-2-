@@ -19,6 +19,7 @@
                             <h3 style="text-align: center;">안녕하세요 {{user.username}}님</h3>
                             {{user.birthday}}
                             {{user.gender}}
+                            {{user.point}}
                             <a href="{%url 'logout'%}">로그아웃</a>
                         {% else %}
                         <a href="{%url 'login'%}" class="btn btn btn-outline-primary btn-lg " style="height: 70px;padding-top: 20px;">로그인</a>

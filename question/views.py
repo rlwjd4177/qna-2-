@@ -3,6 +3,7 @@ from .forms import QuestionForm
 from .models import Question
 from django.utils import timezone
 from answer.models import Answer
+from account.models import CustomUserModel
 
 def home(request):
     questions = Question.objects.all()
@@ -12,7 +13,6 @@ def question(request,question_id):
     question = get_object_or_404(Question,pk = question_id)
     answers = Answer.objects.filter(question_id = question.id)
     return render(request,'question.html',{'question':question, 'answers': answers})
-
 
 def search(request):
     q = request.GET.get('q')
@@ -41,6 +41,7 @@ def new(request):
         if form.is_valid :
             content = form.save(commit=False)
             content.pub_date = timezone.now()
+            content.user = request.user
             content.save()
             return redirect('question',content.id)
     else :

@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container">
     <div class="point">
-    {{question.subject_name}} > {{question.professor_name}}
+    {{question.subject_name}}(과목명) > {{question.professor_name}}(교수명), {{question.user.username}}
     </div>
     
         
@@ -21,33 +21,23 @@
     <a href="{%url 'edit' question.id%}" class="btn-sm btn btn-outline-primary">수정하기</a>
     <a href="{%url 'delete' question.id%}" class="btn-sm btn btn-outline-primary">삭제하기</a>
     
-    <!-- <hr> -->
+    <hr>
+    <a href="{% url 'answer' question.id %}" class="btn-lg btn btn-outline-primary" style="margin-left:42%;">답변하기</a>
     <br>
-    <a href="{% url 'answer' question.id %}" class="btn-sm btn btn-outline-primary" style="float:right;">답변하기</a>
-    <br>
-    <br>
-
-    <!-- 답변 카드 -->
-
     {% for answer in answers %}
-        <div class="card p-3 " style="width: 40rem; float:right;">
-            {% if answer.sleceted == True %}
-                <p style="text-align: right; margin: 0;">채택됨</p>
-            {% else%}
-                <a href="{% url 'select' answer.id%}" class="btn-sm btn btn-outline-primary" style="float:right;width:4.7rem;">채택하기</a>
-                <p style="text-align:right; margin: 0;">채택을 기다리는중 !</p>
-            {% endif %}
-                <h5>{{answer.title}}</h5>
-                <hr>
-                {{answer.body}}
-                <br>
-                {% if question.image%}
-                    <img src="{{answer.image.url}}">
-                {% endif %}
-
-                <p style="text-align: right; margin: 0;color:grey;">{{answer.pub_date}}</p>
-        </div>
-        <p style="clear:both;">&nbsp</p>
+        {% if answer.selected == True%}
+        <form action="{% url 'select' answer.id%}">
+            <input type="submit" value="채택하기">
+        </form>
+        {% elif answer.selected != True %}
+        채택됨!<br>
+        {% endif%}
+    
+        {{answer.title}}
+        {{answer.body}}
+        {{answer.pub_date}}
+        {{answer.user.username}}
+        <hr>
     {% endfor%}
     
     <hr>
