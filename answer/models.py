@@ -1,5 +1,5 @@
 from django.db import models
-
+from account.models import CustomUserModel
 # Create your models here.
 from django.db import models
 from question.models import *
@@ -10,8 +10,8 @@ class Answer(models.Model):
     pub_date = models.DateTimeField()
     body = models.TextField()
     
+    user = models.ForeignKey(CustomUserModel, on_delete=models.CASCADE)
     selected = models.BooleanField(null=False, default=False)
-   
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
 
 
